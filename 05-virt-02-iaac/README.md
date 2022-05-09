@@ -46,10 +46,14 @@
 
 - VirtualBox
 
+![img_1.png](img_1.png)
+
 - Vagrant
 
 ![img.png](img.png)
 - Ansible
+
+![img_2.png](img_2.png)
 
 
 *Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.*
