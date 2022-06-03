@@ -20,8 +20,11 @@
 - создайте пользователя test-admin-user и БД test_db
 
 CREATE DATABASE test_db;
+
 ![img_3.png](img_3.png)
+
 CREATE ROLE "test-admin-user" SUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN;
+
 ![img_4.png](img_4.png)
 
 - в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже)
@@ -51,7 +54,7 @@ CREATE ROLE "test-admin-user" SUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT LOGIN;
 - описание таблиц (describe)
 ![img_11.png](img_11.png)
 - SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
-- 
+
  select * from INFORMATION_SCHEMA.TABLE_PRIVILEGES where grantee in ('test-admin-user', 'test-simple-user');
 ![img_13.png](img_13.png)
 - список пользователей с правами над таблицами test_db
