@@ -14,6 +14,7 @@
 - соберите docker-образ и сделайте `push` в ваш docker.io репозиторий
 - запустите контейнер из получившегося образа и выполните запрос пути `/` c хост-машины
 
+![img.png](img.png)
 Требования к `elasticsearch.yml`:
 - данные `path` должны сохраняться в `/var/lib`
 - имя ноды должно быть `netology_test`
@@ -21,6 +22,9 @@
 В ответе приведите:
 - текст Dockerfile манифеста
 - ссылку на образ в репозитории dockerhub
+
+https://hub.docker.com/layers/227553082/marinakrivoshei/netolo_docker1/v1/images/sha256-3008711a898a62f86bc69fac628f905bf528048aacfc69c00fd52276b5fe4d5d?context=repo
+
 - ответ `elasticsearch` на запрос пути `/` в json виде
 
 Подсказки:
