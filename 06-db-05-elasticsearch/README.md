@@ -85,11 +85,59 @@ https://hub.docker.com/layers/227553082/marinakrivoshei/netolo_docker1/v1/images
 
 Получите список индексов и их статусов, используя API и **приведите в ответе** на задание.
 
+```html 
+[elasticsearch@528d32317937 /]$ curl -X GET --insecure -u elastic "https://localhost:9200/_cat/indices?v=true"
+Enter host password for user 'elastic':
+health status index uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+green  open   ind-1 EZa1RLMgTHiAr4o3-Pu02w   1   0          0            0       225b           225b
+yellow open   ind-3 2Gqd9FbuSHu7Zjh2aCSweg   4   2          0            0       900b           900b
+yellow open   ind-2 OE-pI1QfRPakHxtw7nYJqg   2   1          0            0       450b           450b
+```
+
 Получите состояние кластера `elasticsearch`, используя API.
+
+```html
+[elasticsearch@528d32317937 /]$ curl -X GET --insecure -u elastic "https://localhost:9200/_cluster/health?pretty"
+Enter host password for user 'elastic':
+{
+  "cluster_name" : "elasticsearch",
+  "status" : "yellow",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 9,
+  "active_shards" : 9,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 10,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 47.368421052631575
+}
+```
 
 Как вы думаете, почему часть индексов и кластер находится в состоянии yellow?
 
 Удалите все индексы.
+
+```html
+[elasticsearch@528d32317937 /]$ curl -X DELETE --insecure -u elastic "https://localhost:9200/ind-1?pretty"
+Enter host password for user 'elastic':
+{
+  "acknowledged" : true
+}
+[elasticsearch@528d32317937 /]$ curl -X DELETE --insecure -u elastic "https://localhost:9200/ind-2?pretty"
+Enter host password for user 'elastic':
+{
+  "acknowledged" : true
+}
+[elasticsearch@528d32317937 /]$ curl -X DELETE --insecure -u elastic "https://localhost:9200/ind-3?pretty"
+Enter host password for user 'elastic':
+{
+  "acknowledged" : true
+  ```
 
 **Важно**
 
