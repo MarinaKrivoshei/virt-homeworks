@@ -21,11 +21,42 @@
 
 В ответе приведите:
 - текст Dockerfile манифеста
+```html
+FROM centos:7
+USER root
+RUN yum -y update
+RUN yum -y install wget
+RUN yum -y install java-1.8.0-openjdk
+RUN yum -y install java-1.8.0-openjdk-devel
+RUN useradd elasticsearch -c 'Elasticsearch User' -d /home/elasticsearch
+RUN \
+   mkdir /var/lib/elasticsearch && \
+   mkdir /var/log/elasticsearch
+RUN \
+  chown elasticsearch:elasticsearch /var/lib/elasticsearch && \
+  chown elasticsearch:elasticsearch /var/log/elasticsearch
+
+USER elasticsearch
+RUN cd /tmp && wget --no-check-certificate https://138.3.251.58/elasticsearch-8.1.2-linux-x86_64.tar.gz && tar -xzf elasticsearch-8.1.2-linux-x86_64.tar.gz && rm elasticsearch-8.1.2-linux-x86_64.tar.gz
+RUN mv /tmp/elasticsearch-8.1.2/* /home/elasticsearch
+ENV ES_HOME /home/elasticsearch
+ENV ES_CONFIG /home/elasticsearch/config/elasticsearch.yml
+ENV PATH $PATH:$ES_HOME/bin
+RUN echo "node.name: netology_test" >> $ES_CONFIG
+RUN echo "path.data: /var/lib/elasticsearch" >> $ES_CONFIG
+RUN echo "path.logs: /var/log/elasticsearch" >> $ES_CONFIG
+#COPY elasticsearch.yml $ES_HOME/config
+CMD ["elasticsearch"]
+EXPOSE 9200
+EXPOSE 9300
+```
 - ссылку на образ в репозитории dockerhub
 
 https://hub.docker.com/layers/227553082/marinakrivoshei/netolo_docker1/v1/images/sha256-3008711a898a62f86bc69fac628f905bf528048aacfc69c00fd52276b5fe4d5d?context=repo
 
 - ответ `elasticsearch` на запрос пути `/` в json виде
+
+
 
 Подсказки:
 - возможно вам понадобится установка пакета perl-Digest-SHA для корректной работы пакета shasum
