@@ -5,7 +5,7 @@
 Перед выполнением задания вы можете ознакомиться с 
 [дополнительными материалами](https://github.com/netology-code/virt-homeworks/tree/master/additional/README.md).
 
-## Задача 1
+## Задача 1.
 
 Используя docker поднимите инстанс PostgreSQL (версию 12) c 2 volume, 
 в который будут складываться данные БД и бэкапы.
