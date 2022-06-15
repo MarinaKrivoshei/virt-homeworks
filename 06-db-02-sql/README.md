@@ -14,7 +14,7 @@
 ![img_2.png](img_2.png)
 ![img.png](img.png)
 
-## Задача 2
+## Задача 2.
 
 В БД из задачи 1: 
 - создайте пользователя test-admin-user и БД test_db
