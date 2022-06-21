@@ -157,21 +157,71 @@ Enter host password for user 'elastic':
 Используя API [зарегистрируйте](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#snapshots-register-repository) 
 данную директорию как `snapshot repository` c именем `netology_backup`.
 
+``` html
+[root@9e4b47fd6737 /]# curl -XGET 'localhost:9200/_snapshot?pretty'
+{
+  "netology_backup" : {
+    "type" : "fs",
+    "settings" : {
+      "location" : "/elasticsearch-8.0.1/snapshots"
+    }
+  }
+}
+```
+
 **Приведите в ответе** запрос API и результат вызова API для создания репозитория.
 
 Создайте индекс `test` с 0 реплик и 1 шардом и **приведите в ответе** список индексов.
+
+``` html
+[root@9e4b47fd6737 /]# curl -XGET 'localhost:9200/_cat/indices'
+green open test 8fo9T50RRO699GRGicOV0A 1 0 0 0 225b 225b
+```
 
 [Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) 
 состояния кластера `elasticsearch`.
 
 **Приведите в ответе** список файлов в директории со `snapshot`ами.
 
+``` html
+[root@9e4b47fd6737 /]# ls -la /elasticsearch-8.0.1/snapshots/
+total 48
+drwxr-xr-x 3 elasticsearch elasticsearch  4096 Jun 13 10:29 .
+drwxr-xr-x 1 elasticsearch elasticsearch  4096 Jun 13 10:10 ..
+-rw-r--r-- 1 elasticsearch elasticsearch   856 Jun 13 10:29 index-0
+-rw-r--r-- 1 elasticsearch elasticsearch     8 Jun 13 10:29 index.latest
+drwxr-xr-x 4 elasticsearch elasticsearch  4096 Jun 13 10:29 indices
+-rw-r--r-- 1 elasticsearch elasticsearch 17505 Jun 13 10:29 meta-FXuaBy8uRbivGppOFUGbpw.dat
+-rw-r--r-- 1 elasticsearch elasticsearch   369 Jun 13 10:29 snap-FXuaBy8uRbivGppOFUGbpw.dat
+```
+
 Удалите индекс `test` и создайте индекс `test-2`. **Приведите в ответе** список индексов.
+
+``` html
+[root@9e4b47fd6737 /]# curl -XGET 'localhost:9200/_cat/indices'
+green open test2 hUGthGaOTRuPjdtwCrEnwQ 1 0 0 0 225b 225b
+green open test  8fo9T50RRO699GRGicOV0A 1 0 0 0 225b 225b
+```
 
 [Восстановите](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html) состояние
 кластера `elasticsearch` из `snapshot`, созданного ранее. 
 
 **Приведите в ответе** запрос к API восстановления и итоговый список индексов.
+
+``` html
+[root@9e4b47fd6737 /]# curl -v -XPOST "localhost:9200/_snapshot/netology_backup/snapshot-13062022-17:30/_restore" -H 'Content-Type: application/json' -d '
+{
+  "indices": "*",
+  "include_global_state": true
+}
+'
+
+{"accepted":true}
+
+[root@9e4b47fd6737 /]# curl -XGET 'localhost:9200/_cat/indices'
+green open test                        -5cfJwY2SZapm7-oLTH9xw 1 0  0 0    225b    225b
+green open .monitoring-es-7-2022.06.13 nrcMvwFpSLiFdVcIRTo7GQ 1 0 32 0 143.9kb 143.9kb
+```
 
 Подсказки:
 - возможно вам понадобится доработать `elasticsearch.yml` в части директивы `path.repo` и перезапустить `elasticsearch`
