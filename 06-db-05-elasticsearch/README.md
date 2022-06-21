@@ -175,7 +175,7 @@ Enter host password for user 'elastic':
 
 ``` html
 [root@9e4b47fd6737 /]# curl -XGET 'localhost:9200/_cat/indices'
-green open test 8fo9T50RRO699GRGicOV0A 1 0 0 0 225b 225b
+green open test mOr6l81qS1K7d_hTy6htEQ 1 0 0 0 225b 225b
 ```
 
 [Создайте `snapshot`](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html) 
@@ -219,8 +219,8 @@ green open test  8fo9T50RRO699GRGicOV0A 1 0 0 0 225b 225b
 {"accepted":true}
 
 [root@9e4b47fd6737 /]# curl -XGET 'localhost:9200/_cat/indices'
-green open test                        -5cfJwY2SZapm7-oLTH9xw 1 0  0 0    225b    225b
-green open .monitoring-es-7-2022.06.13 nrcMvwFpSLiFdVcIRTo7GQ 1 0 32 0 143.9kb 143.9kb
+green open test                        JaAsRk_pQvKuoaSSFWgPQw 1 0  0 0    225b    225b
+green open .monitoring-es-7-2022.06.13 OvmtmgCqRP6r9qtrRJ0sBQ 1 0 32 0 143.9kb 143.9kb
 ```
 
 Подсказки:
