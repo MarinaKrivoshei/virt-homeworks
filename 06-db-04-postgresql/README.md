@@ -209,6 +209,10 @@ root@9462747f2e11:/var/lib/postgresql/data# pg_dump -U postgres -d test_database
 title character varying(80) NOT NULL UNIQUE
 alter table orders add unique (title, price);
 ```
+Сделать составное ограничение для секционированной таблицы (т.к ограничения уникальности в секционированных таблицах должны включать все столбцы ключа разбиения.), то выглядеть будет
+title character varying(80) NOT NULL UNIQUE
+alter table orders add unique (title, price);
+
 ---
 
 ### Как cдавать задание
