@@ -5,7 +5,7 @@
 Перед выполнением задания вы можете ознакомиться с 
 [дополнительными материалами](https://github.com/netology-code/virt-homeworks/tree/master/additional/README.md).
 
-## Задача 1
+## Задача 1.
 
 Используя docker поднимите инстанс MySQL (версию 8). Данные БД сохраните в volume.
 
